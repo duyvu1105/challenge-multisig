@@ -20,10 +20,15 @@ const deployMetaMultiSigWallet: DeployFunction = async function (hre: HardhatRun
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
+  // Get the chain ID
+  const chainId = await hre.getChainId();
+
   await deploy("MetaMultiSigWallet", {
     from: deployer,
     // Contract constructor arguments
-    args: [31337, ["**YOUR FRONTEND ADDRESS**"], 1],
+    // TODO: Replace with your actual frontend wallet address before deploying
+    // For local development, you can use the deployer address or burner wallet address
+    args: [chainId, [deployer], 1],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.
